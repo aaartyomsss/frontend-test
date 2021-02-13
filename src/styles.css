@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.centerElementsDiv {
+    text-align: center;
+    padding: 10
+}
+
+.tableBtn {
+    padding: 10;
+}
+
+.centerParent {
+    position: relative;
+    border: 1px solid black;
+    height: 100vh;
+}
+
+.centerElements {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    height: auto;
+    text-align: center;
+}
+
+.centerCircle {
+    position: absolute;
+    left: 50%;
+}
