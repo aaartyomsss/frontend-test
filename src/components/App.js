@@ -3,27 +3,28 @@ import api from '../lib/api';
 import { CircularProgress } from '@material-ui/core';
 import Home from './Home';
 import '../styles.css';
-import { useError } from '../utils/customHooks';
 import { useHistory } from 'react-router-dom'
 
 
 export const App = () => {
 
   // State management
-  const [ initLoading, setInitLoading] = useState(false);
-  const [ loading, setLoading ] = useState(false);
-  const [ error, errorService ] = useError(null);
+  // As app is simple, built-in hooks would be a sufficient solution
+  const [ initLoading, setInitLoading] = useState(false); // Handles loading state when page is open for the first time
+  const [ loading, setLoading ] = useState(false); // Handles general loading, when button is pressed
+  const [ error, setError ] = useState(null);
   const [ users, setUsers ] = useState([]);
   const [ projects, setProjects ] = useState([]);
-  const history = useHistory();
+  const history = useHistory(); // As react router is used, after initial loading user will be pushed to users tab
 
-  // function for fetching
+  // Fetching data
   const fetchData = async (type) => {
     try {
+      setError(null)
       setLoading(true)
       const result = type === 'user' ? await api.getUsersDiff() : await api.getProjectsDiff();
       if (result.data.length === 0) {
-        errorService.setErr('No more data to display');
+        setError('No more data to display');
       }
       const updatedList = type === 'user' ? users.concat(result.data) : projects.concat(result.data);
       setLoading(false);
@@ -35,7 +36,7 @@ export const App = () => {
     } catch (error) {
       setLoading(false)
       console.error(error.message);
-      errorService.setErr('Error occured while fetching data. Please try again!');
+      setError('Error occured while fetching data. Please try again!');
     }
   };
 
@@ -58,6 +59,7 @@ export const App = () => {
     }
   }, [history])
 
+  // Displays loading circle when page is first opened
   if(initLoading) {
     return (
       <div className='centerParent'>

@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     buttonAndLoading: {
         margin: '10px 0',
         [theme.breakpoints.down('sm')]: {
-            height: "75%"
+            height: '75%'
         }
     },
     error: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
         [theme.breakpoints.down('sm')]: {
             fontSize: 12,
-            margin: "10 0",
+            margin: '10 0',
             padding: 0
         }
     },
@@ -39,14 +39,14 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]: {
             textAlign: 'right',
             fontSize: 12,
-            margin: "10 0",
-            padding: "0 15 0 0"
+            margin: '10 0',
+            padding: '0 15 0 0'
         }
     },
     tableRow: {
         [theme.breakpoints.down('sm')]: {
             fontSize: 12,
-            margin: "5 0",
+            margin: '5 0',
             padding: 0
         }
     },
@@ -54,8 +54,8 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]: {
             textAlign: 'right',
             fontSize: 12,
-            margin: "10 0",
-            padding: "0 15 0 0"
+            margin: '10 0',
+            padding: '0 15 0 0'
         }
     },
     icon: {
@@ -66,13 +66,7 @@ const useStyles = makeStyles((theme) => ({
 const TableComponent = ({ dataArray, type, loading, fetch, errorMsg }) => {
     // Handling sorting by date 
     const [ filter, setFilter ] = useState('new');
-    // Styles for the bottom elements
     const classes = useStyles();
-
-    // waiting to receive data to display
-    if (dataArray.length === 0){
-        return <div></div>
-    }
 
     // Formatting data
     const rows = sortByDate(dataArray.map(obj => createData(obj)), filter);
@@ -83,7 +77,7 @@ const TableComponent = ({ dataArray, type, loading, fetch, errorMsg }) => {
                 <TableHead>
                     <TableRow>
                         <TableCell 
-                            id="switchFilter"
+                            id='switchFilter'
                             className={classes.tableHeader} 
                             onClick={() => setFilter(filter === 'new' ? 'old' : 'new')}>
                                 <div>
@@ -112,11 +106,11 @@ const TableComponent = ({ dataArray, type, loading, fetch, errorMsg }) => {
                     {loading 
                         ? <CircularProgress className={classes.buttonAndLoading}/> 
                         : <Button 
-                            id="fetch"
+                            id='fetch'
                             color='primary' 
                             variant='contained' 
                             onClick={() => fetch(type)} 
-                            className={classes.buttonAndLoading}>Load More</Button>}
+                            className={classes.buttonAndLoading}>{errorMsg ? 'Retry' : 'Load More'}</Button>}
                 </div>
             </div>
         </TableContainer>

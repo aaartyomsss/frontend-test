@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
     root: {
-        margin: "auto",
+        margin: 'auto',
         width: '100%'
     },
     grid: {
@@ -31,7 +31,7 @@ const NavBar = () => {
         <div style={styles}>
             <Grid container>
                 <Grid item xs={6} className={classes.grid}>
-                    <Button className={classes.root}>
+                    <Button className={classes.root} id='navBarTest'>
                         <NavLink style={link} to='/users'>Users</NavLink>
                     </Button>
                 </Grid>
